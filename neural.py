@@ -1,7 +1,6 @@
 import numpy
 import scipy.special
 
-
 class NeuralNetwork:
     # initialize neural network
     def __init__(self, inputnodes, hiddenlayers, hiddennodes, outputnodes, learningrate):
@@ -13,7 +12,6 @@ class NeuralNetwork:
         self.layers = hiddenlayers + 2
         self.weights = self.layers - 1
         self.errors = self.layers - 1
-
 
         # initialize wight -0.5 to 0.5
         self.w = [0] * self.weights
@@ -47,25 +45,6 @@ class NeuralNetwork:
         # update weight
         for i in range(0, self.weights):
             self.w[i] = self.w[i] + self.lr * numpy.dot(e[i] * outputs[i + 1] * (1 - outputs[i + 1]), outputs[i].T)
-
-        '''
-        inputs = numpy.array(inputs_list, ndmin=2).T
-        targets = numpy.array(targets_list, ndmin=2).T
-
-        # calculate outputs of neural network for each multiple inputs at once
-        hidden_inputs = numpy.dot(self.wih, inputs)
-        hidden_outputs = self.activation_function(hidden_inputs)
-        final_inputs = numpy.dot(self.who, hidden_outputs)
-        final_outputs = self.activation_function(final_inputs)
-
-        # errors for each outputs
-        output_errors = targets - final_outputs
-        hidden_errors = numpy.dot(self.who.T, output_errors)
-
-        # update weight
-        self.who = self.who + self.lr * numpy.dot(output_errors * final_outputs * (1 - final_outputs), hidden_outputs.T)
-        self.wih = self.wih + self.lr * numpy.dot(hidden_errors * hidden_outputs * (1 - hidden_outputs), inputs.T)
-        '''
 
         pass
 
