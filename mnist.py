@@ -8,7 +8,7 @@ input_nodes = 28 * 28
 hidden_layers = 3
 hidden_nodes = 100
 output_nodes = 10
-learning_rate = 0.025
+learning_rate = 0.01
 epochs = 15
 
 # initialize network
