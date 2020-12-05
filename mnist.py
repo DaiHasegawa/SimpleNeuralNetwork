@@ -5,10 +5,10 @@ import matplotlib.pyplot
 
 # params
 input_nodes = 28 * 28
-hidden_layers = 1
+hidden_layers = 3
 hidden_nodes = 100
 output_nodes = 10
-learning_rate = 0.1
+learning_rate = 0.025
 epochs = 15
 
 # initialize network
@@ -20,6 +20,7 @@ training_data_list = training_data_file.readlines()
 training_data_file.close()
 
 # train for all training data
+loss = []
 for e in range(epochs):
     print("epoch = ", e+1)
     for record in tqdm(training_data_list):
@@ -27,7 +28,8 @@ for e in range(epochs):
         inputs = (numpy.asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
         targets = numpy.zeros(output_nodes) + 0.01
         targets[int(record[0])] = 0.99
-        nn.train(inputs, targets)
+        loss.append(nn.train(inputs, targets))
+    print("training loss = ", numpy.average(loss))
 
     # test data
     test_data_file = open("mnist_dataset/mnist_test.csv", 'r')

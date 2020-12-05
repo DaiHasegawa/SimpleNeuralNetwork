@@ -46,7 +46,12 @@ class NeuralNetwork:
         for i in range(0, self.weights):
             self.w[i] = self.w[i] + self.lr * numpy.dot(e[i] * outputs[i + 1] * (1 - outputs[i + 1]), outputs[i].T)
 
-        pass
+        # calculate training loss
+        loss = []
+        for i in range(0, self.errors):
+            loss.append(numpy.average(e[i]))
+
+        return numpy.average(loss)
 
     # calculate output of neural network
     def query(self, input_lists):
